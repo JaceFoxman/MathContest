@@ -9,8 +9,19 @@ Option Strict On
 Option Explicit On
 
 Public Class MathContestForm
-    Private Sub MathContestForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+    Sub SetDefaults()
+        NameTextBox.Text = ""
+        AgeTextBox.Text = ""
+        GradeTextBox.Text = ""
+        FirstNumberTextBox.Text = ""
+        SecondNumberTextBox.Text = ""
+        StudentAnswerTextBox.Text = ""
+        AddRadioButton.Checked = True
+        SubtractRadioButton.Checked = False
+        MultiplyRadioButton.Checked = False
+        DivideRadioButton.Checked = False
+        ClearButton.Enabled = False
+        SummeryButton.Enabled = False
     End Sub
 
     Function UserInput() As Boolean
@@ -39,11 +50,25 @@ Public Class MathContestForm
             NameTextBox.Focus()
             errormessage &= "Please enter the students Name."
         End If
-
+        If Not checkPassed Then
+            MsgBox(errormessage, MsgBoxStyle.Exclamation, "Missing information")
+        End If
         Return checkPassed
     End Function
+    Private Sub SubmitButton_Click(sender As Object, e As EventArgs) Handles SubmitButton.Click
 
+    End Sub
+
+    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
+        NameTextBox.Text = ""
+        AgeTextBox.Text = ""
+        GradeTextBox.Text = ""
+        FirstNumberTextBox.Text = ""
+        SecondNumberTextBox.Text = ""
+        StudentAnswerTextBox.Text = ""
+    End Sub
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
         Me.Close()
     End Sub
+
 End Class
