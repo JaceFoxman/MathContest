@@ -16,13 +16,67 @@ Public Class MathContestForm
         FirstNumberTextBox.Text = ""
         SecondNumberTextBox.Text = ""
         StudentAnswerTextBox.Text = ""
+        StudentAnswerTextBox.Enabled = False
         AddRadioButton.Checked = True
-        SubtractRadioButton.Checked = False
-        MultiplyRadioButton.Checked = False
-        DivideRadioButton.Checked = False
-        ClearButton.Enabled = False
+        AddRadioButton.Enabled = False
+        SubtractRadioButton.Enabled = False
+        MultiplyRadioButton.Enabled = False
+        DivideRadioButton.Enabled = False
+        ClearButton.Enabled = True
         SummeryButton.Enabled = False
+        SubmitButton.Enabled = False
     End Sub
+
+    Sub Summary()
+        Dim _Summary As String
+        _Summary = $"{NameTextBox.Text} got {ScoreCounter(, True)} out of {AttemptCounter(, True)}"
+        MsgBox(_Summary, MsgBoxStyle.Information, "Total Score")
+    End Sub
+
+    Sub StudentAnswer()
+        Dim message As String
+        If StudentAnswerTextBox.Enabled = True Then
+            If CInt(StudentAnswerTextBox.Text) = MathProblem() Then
+                message = "Your answer was correct!"
+                MsgBox(message, MsgBoxStyle.Exclamation, "Congradulations!")
+            ElseIf CInt(StudentAnswerTextBox.Text) <> MathProblem() Then
+
+                message = $"Sorry the correct answer is {MathProblem()}"
+                MsgBox(message, MsgBoxStyle.Question, "Better Luck Next Time.")
+            End If
+        End If
+    End Sub
+
+    Function ScoreCounter(Optional clear As Boolean = False, Optional CurrentScore As Boolean = False) As Integer
+        Static score As Integer
+        If StudentAnswerTextBox.Enabled = True Then
+            If clear = False And CurrentScore = False Then
+                If CInt(StudentAnswerTextBox.Text) = MathProblem() Then
+                    score += 1
+                ElseIf CInt(StudentAnswerTextBox.Text) <> MathProblem() Then
+                    score += 0
+                End If
+            ElseIf clear = True Then
+                score = 0
+            End If
+            Return score
+        End If
+    End Function
+    Function AttemptCounter(Optional clear As Boolean = False, Optional CurrentAttempt As Boolean = False) As Integer
+        Static attempts As Integer
+        If StudentAnswerTextBox.Enabled = True Then
+            If clear = False And CurrentAttempt = False Then
+                If CInt(StudentAnswerTextBox.Text) = MathProblem() Then
+                    attempts += 1
+                ElseIf CInt(StudentAnswerTextBox.Text) <> MathProblem() Then
+                    attempts += 1
+                End If
+            ElseIf clear = True Then
+                attempts = 0
+            End If
+            Return attempts
+        End If
+    End Function
 
     Function UserInput() As Boolean
         Dim checkPassed As Boolean = True
@@ -30,33 +84,120 @@ Public Class MathContestForm
         If IsNumeric(AgeTextBox.Text) = False Then
             checkPassed = False
             AgeTextBox.Focus()
-            errormessage &= "Enter Age between 7-11." & vbNewLine
+            errormessage &= "Student must be between the ages of 7-11 to compete." & vbNewLine
+        ElseIf CInt(AgeTextBox.Text) < 7 Or CInt(AgeTextBox.Text) > 11 Then
+            checkPassed = False
+            AgeTextBox.Focus()
+            errormessage &= "Student must be between the ages of 7-11 to compete." & vbNewLine
         End If
 
         If IsNumeric(GradeTextBox.Text) = False Then
             checkPassed = False
             GradeTextBox.Focus()
-            errormessage &= "Enter Grade between 1-4." & vbNewLine
-        End If
+            errormessage &= "Student must be in between grade 1-4 to compete." & vbNewLine
 
-        If IsNumeric(StudentAnswerTextBox.Text) = False Then
+        ElseIf CInt(GradeTextBox.Text) < 1 Or CInt(GradeTextBox.Text) > 4 Then
             checkPassed = False
-            StudentAnswerTextBox.Focus()
-            errormessage &= "Please enter the students answer." & vbNewLine
+            GradeTextBox.Focus()
+            errormessage &= "Student must be in between grade 1-4 to compete." & vbNewLine
         End If
 
         If NameTextBox.Text = "" Then
             checkPassed = False
             NameTextBox.Focus()
-            errormessage &= "Please enter the students Name."
+            errormessage &= "Please enter the student's Name."
         End If
+
         If Not checkPassed Then
-            MsgBox(errormessage, MsgBoxStyle.Exclamation, "Missing information")
+            MsgBox(errormessage, MsgBoxStyle.Critical, "Student not eligible to compete")
         End If
         Return checkPassed
     End Function
-    Private Sub SubmitButton_Click(sender As Object, e As EventArgs) Handles SubmitButton.Click
 
+    Function MathProblem() As Integer
+        Dim answer As Integer
+        If AddRadioButton.Checked = True Then
+            answer = Add()
+        ElseIf SubtractRadioButton.Checked = True Then
+            answer = Subtract()
+        ElseIf MultiplyRadioButton.Checked = True Then
+            answer = Multiply()
+        ElseIf DivideRadioButton.Checked = True Then
+            answer = Divide()
+        End If
+        Return answer
+    End Function
+    Function Add() As Integer
+        Dim sum As Integer
+        Dim number1 As Integer
+        Dim number2 As Integer
+
+        number1 = CInt(FirstNumberTextBox.Text)
+        number2 = CInt(SecondNumberTextBox.Text)
+        sum = (number1 + number2)
+
+        Return sum
+    End Function
+
+    Function Subtract() As Integer
+        Dim difference As Integer
+        Dim number1 As Integer
+        Dim number2 As Integer
+
+        number1 = CInt(FirstNumberTextBox.Text)
+        number2 = CInt(SecondNumberTextBox.Text)
+        difference = (number1 - number2)
+
+        Return difference
+    End Function
+    Function Multiply() As Integer
+        Dim product As Integer
+        Dim number1 As Integer
+        Dim number2 As Integer
+
+        number1 = CInt(FirstNumberTextBox.Text)
+        number2 = CInt(SecondNumberTextBox.Text)
+        product = (number1 * number2)
+
+        Return product
+    End Function
+
+    Function Divide() As Integer
+        Dim quotient As Integer
+        Dim number1 As Integer
+        Dim number2 As Integer
+
+        number1 = CInt(FirstNumberTextBox.Text)
+        number2 = CInt(SecondNumberTextBox.Text)
+        quotient = (number1 \ number2)
+
+
+        Return quotient
+    End Function
+
+    Function RNG(min As Integer, max As Integer) As Integer
+        Dim value As Single
+        Randomize()
+        value = Rnd()
+        value *= max - min
+        value += min
+        Return CInt(Math.Ceiling(value))
+    End Function
+
+    Private Sub SubmitButton_Click(sender As Object, e As EventArgs) Handles SubmitButton.Click
+        If UserInput() = True Then
+            StudentAnswer()
+            AttemptCounter()
+            ScoreCounter()
+            SummeryButton.Enabled = True
+            FirstNumberTextBox.Text = $"{(RNG(1, 20))}"
+            SecondNumberTextBox.Text = $"{(RNG(1, 20))}"
+            StudentAnswerTextBox.Enabled = True
+            AddRadioButton.Enabled = True
+            SubtractRadioButton.Enabled = True
+            MultiplyRadioButton.Enabled = True
+            DivideRadioButton.Enabled = True
+        End If
     End Sub
 
     Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
@@ -66,9 +207,46 @@ Public Class MathContestForm
         FirstNumberTextBox.Text = ""
         SecondNumberTextBox.Text = ""
         StudentAnswerTextBox.Text = ""
+        ScoreCounter(True)
+        AttemptCounter(True)
+        FirstNumberTextBox.Text = $"{(RNG(1, 20))}"
+        SecondNumberTextBox.Text = $"{(RNG(1, 20))}"
+
+    End Sub
+    Private Sub SummeryButton_Click(sender As Object, e As EventArgs) Handles SummeryButton.Click
+        Summary()
+    End Sub
+    Private Sub MathContestForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        SetDefaults()
     End Sub
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
         Me.Close()
     End Sub
 
+    Private Sub AddRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles AddRadioButton.CheckedChanged
+        If StudentAnswerTextBox.Enabled = True Then
+            FirstNumberTextBox.Text = $"{(RNG(1, 20))}"
+            SecondNumberTextBox.Text = $"{(RNG(1, 20))}"
+        ElseIf StudentAnswerTextBox.Enabled = False Then
+        End If
+    End Sub
+
+    Private Sub SubtractRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles SubtractRadioButton.CheckedChanged
+        FirstNumberTextBox.Text = $"{(RNG(1, 20))}"
+        SecondNumberTextBox.Text = $"{(RNG(1, 20))}"
+    End Sub
+
+    Private Sub MultiplyRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles MultiplyRadioButton.CheckedChanged
+        FirstNumberTextBox.Text = $"{(RNG(1, 20))}"
+        SecondNumberTextBox.Text = $"{(RNG(1, 20))}"
+    End Sub
+
+    Private Sub DivideRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles DivideRadioButton.CheckedChanged
+        FirstNumberTextBox.Text = $"{(RNG(1, 20))}"
+        SecondNumberTextBox.Text = $"{(RNG(1, 20))}"
+    End Sub
+
+    Private Sub NameTextBox_TextChanged(sender As Object, e As EventArgs) Handles NameTextBox.TextChanged
+        SubmitButton.Enabled = True
+    End Sub
 End Class

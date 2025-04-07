@@ -22,6 +22,7 @@ Partial Class MathContestForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.StudentInformationGroupBox = New System.Windows.Forms.GroupBox()
         Me.GradeLabel = New System.Windows.Forms.Label()
         Me.AgeLabel = New System.Windows.Forms.Label()
@@ -46,6 +47,21 @@ Partial Class MathContestForm
         Me.SummeryButton = New System.Windows.Forms.Button()
         Me.ClearButton = New System.Windows.Forms.Button()
         Me.SubmitButton = New System.Windows.Forms.Button()
+        Me.SubmitButtonToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ClearButtonToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.SummeryButtonToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ExitButtonToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.AddRadioButtonToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.SubtractRadioButtonToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.MultiplyRadioToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.DivideRadioButtonToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.StudentTextBoxToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.SecondNumberTextBoxToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.FirstNumberTextBoxToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.NameTextBoxToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.AgeTextBoxToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.GradeTextBoxToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.StudentInformationGroupBox.SuspendLayout()
         Me.CurrentMathProblemGroupBox.SuspendLayout()
         Me.MathProblemTypeGroupBox.SuspendLayout()
@@ -104,6 +120,8 @@ Partial Class MathContestForm
         Me.GradeTextBox.Name = "GradeTextBox"
         Me.GradeTextBox.Size = New System.Drawing.Size(72, 31)
         Me.GradeTextBox.TabIndex = 2
+        Me.GradeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.GradeTextBoxToolTip.SetToolTip(Me.GradeTextBox, "Enter Students Grade level here.")
         '
         'AgeTextBox
         '
@@ -111,13 +129,16 @@ Partial Class MathContestForm
         Me.AgeTextBox.Name = "AgeTextBox"
         Me.AgeTextBox.Size = New System.Drawing.Size(43, 31)
         Me.AgeTextBox.TabIndex = 1
+        Me.AgeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.AgeTextBoxToolTip.SetToolTip(Me.AgeTextBox, "Enter Students Age Here")
         '
         'NameTextBox
         '
         Me.NameTextBox.Location = New System.Drawing.Point(6, 59)
         Me.NameTextBox.Name = "NameTextBox"
-        Me.NameTextBox.Size = New System.Drawing.Size(256, 31)
+        Me.NameTextBox.Size = New System.Drawing.Size(252, 31)
         Me.NameTextBox.TabIndex = 0
+        Me.NameTextBoxToolTip.SetToolTip(Me.NameTextBox, "Enter Students Name here.")
         '
         'CurrentMathProblemGroupBox
         '
@@ -167,25 +188,29 @@ Partial Class MathContestForm
         '
         'StudentAnswerTextBox
         '
-        Me.StudentAnswerTextBox.Enabled = False
         Me.StudentAnswerTextBox.Location = New System.Drawing.Point(6, 238)
         Me.StudentAnswerTextBox.Name = "StudentAnswerTextBox"
         Me.StudentAnswerTextBox.Size = New System.Drawing.Size(252, 31)
         Me.StudentAnswerTextBox.TabIndex = 2
+        Me.StudentTextBoxToolTip.SetToolTip(Me.StudentAnswerTextBox, "Enter Student answer here")
         '
         'SecondNumberTextBox
         '
+        Me.SecondNumberTextBox.Enabled = False
         Me.SecondNumberTextBox.Location = New System.Drawing.Point(6, 160)
         Me.SecondNumberTextBox.Name = "SecondNumberTextBox"
         Me.SecondNumberTextBox.Size = New System.Drawing.Size(252, 31)
         Me.SecondNumberTextBox.TabIndex = 1
+        Me.SecondNumberTextBoxToolTip.SetToolTip(Me.SecondNumberTextBox, "This number is used last in math operation.")
         '
         'FirstNumberTextBox
         '
-        Me.FirstNumberTextBox.Location = New System.Drawing.Point(10, 72)
+        Me.FirstNumberTextBox.Enabled = False
+        Me.FirstNumberTextBox.Location = New System.Drawing.Point(6, 72)
         Me.FirstNumberTextBox.Name = "FirstNumberTextBox"
         Me.FirstNumberTextBox.Size = New System.Drawing.Size(252, 31)
         Me.FirstNumberTextBox.TabIndex = 0
+        Me.FirstNumberTextBoxToolTip.SetToolTip(Me.FirstNumberTextBox, "This number is used first in math operation")
         '
         'MathProblemTypeGroupBox
         '
@@ -211,6 +236,7 @@ Partial Class MathContestForm
         Me.DivideRadioButton.TabIndex = 3
         Me.DivideRadioButton.TabStop = True
         Me.DivideRadioButton.Text = "Divide"
+        Me.DivideRadioButtonToolTip.SetToolTip(Me.DivideRadioButton, "Math function set to produce the quotient of 1st Number and 2nd Number")
         Me.DivideRadioButton.UseVisualStyleBackColor = True
         '
         'MultiplyRadioButton
@@ -223,6 +249,7 @@ Partial Class MathContestForm
         Me.MultiplyRadioButton.TabIndex = 2
         Me.MultiplyRadioButton.TabStop = True
         Me.MultiplyRadioButton.Text = "Multiply"
+        Me.MultiplyRadioToolTip.SetToolTip(Me.MultiplyRadioButton, "Math function set to produce the product of 1st Number and 2nd Number")
         Me.MultiplyRadioButton.UseVisualStyleBackColor = True
         '
         'SubtractRadioButton
@@ -235,18 +262,20 @@ Partial Class MathContestForm
         Me.SubtractRadioButton.TabIndex = 1
         Me.SubtractRadioButton.TabStop = True
         Me.SubtractRadioButton.Text = "Subtract"
+        Me.SubtractRadioButtonToolTip.SetToolTip(Me.SubtractRadioButton, "Math function set to produce the difference of 1st Number and 2nd Number")
         Me.SubtractRadioButton.UseVisualStyleBackColor = True
         '
         'AddRadioButton
         '
         Me.AddRadioButton.AutoSize = True
         Me.AddRadioButton.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AddRadioButton.Location = New System.Drawing.Point(9, 66)
+        Me.AddRadioButton.Location = New System.Drawing.Point(6, 72)
         Me.AddRadioButton.Name = "AddRadioButton"
         Me.AddRadioButton.Size = New System.Drawing.Size(76, 32)
         Me.AddRadioButton.TabIndex = 0
         Me.AddRadioButton.TabStop = True
         Me.AddRadioButton.Text = "Add"
+        Me.AddRadioButtonToolTip.SetToolTip(Me.AddRadioButton, "Math function set to produce the sum of 1st Number and 2nd Number")
         Me.AddRadioButton.UseVisualStyleBackColor = True
         '
         'ButtonGroupBox
@@ -269,7 +298,7 @@ Partial Class MathContestForm
         Me.ExitButton.Name = "ExitButton"
         Me.ExitButton.Size = New System.Drawing.Size(214, 71)
         Me.ExitButton.TabIndex = 3
-        Me.ExitButton.Text = "Exit"
+        Me.ExitButton.Text = "&Exit"
         Me.ExitButton.UseVisualStyleBackColor = False
         '
         'SummeryButton
@@ -280,7 +309,8 @@ Partial Class MathContestForm
         Me.SummeryButton.Name = "SummeryButton"
         Me.SummeryButton.Size = New System.Drawing.Size(214, 71)
         Me.SummeryButton.TabIndex = 2
-        Me.SummeryButton.Text = "Summery"
+        Me.SummeryButton.Text = "&Summery"
+        Me.SummeryButtonToolTip.SetToolTip(Me.SummeryButton, "Shows how many questions the student has gotten correct")
         Me.SummeryButton.UseVisualStyleBackColor = False
         '
         'ClearButton
@@ -291,7 +321,8 @@ Partial Class MathContestForm
         Me.ClearButton.Name = "ClearButton"
         Me.ClearButton.Size = New System.Drawing.Size(214, 73)
         Me.ClearButton.TabIndex = 1
-        Me.ClearButton.Text = "Clear"
+        Me.ClearButton.Text = "&Clear"
+        Me.ClearButtonToolTip.SetToolTip(Me.ClearButton, "Clears all text fields.")
         Me.ClearButton.UseVisualStyleBackColor = False
         '
         'SubmitButton
@@ -302,13 +333,16 @@ Partial Class MathContestForm
         Me.SubmitButton.Name = "SubmitButton"
         Me.SubmitButton.Size = New System.Drawing.Size(214, 73)
         Me.SubmitButton.TabIndex = 0
-        Me.SubmitButton.Text = "Submit"
+        Me.SubmitButton.Text = "&Submit"
+        Me.SubmitButtonToolTip.SetToolTip(Me.SubmitButton, "Runs program to see if student's answer is correct.")
         Me.SubmitButton.UseVisualStyleBackColor = False
         '
         'MathContestForm
         '
+        Me.AcceptButton = Me.SubmitButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.ExitButton
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.ButtonGroupBox)
         Me.Controls.Add(Me.MathProblemTypeGroupBox)
@@ -351,4 +385,19 @@ Partial Class MathContestForm
     Friend WithEvents SummeryButton As Button
     Friend WithEvents ClearButton As Button
     Friend WithEvents SubmitButton As Button
+    Friend WithEvents SubmitButtonToolTip As ToolTip
+    Friend WithEvents ClearButtonToolTip As ToolTip
+    Friend WithEvents SummeryButtonToolTip As ToolTip
+    Friend WithEvents ExitButtonToolTip As ToolTip
+    Friend WithEvents AddRadioButtonToolTip As ToolTip
+    Friend WithEvents SubtractRadioButtonToolTip As ToolTip
+    Friend WithEvents MultiplyRadioToolTip As ToolTip
+    Friend WithEvents DivideRadioButtonToolTip As ToolTip
+    Friend WithEvents StudentTextBoxToolTip As ToolTip
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents SecondNumberTextBoxToolTip As ToolTip
+    Friend WithEvents GradeTextBoxToolTip As ToolTip
+    Friend WithEvents AgeTextBoxToolTip As ToolTip
+    Friend WithEvents NameTextBoxToolTip As ToolTip
+    Friend WithEvents FirstNumberTextBoxToolTip As ToolTip
 End Class
