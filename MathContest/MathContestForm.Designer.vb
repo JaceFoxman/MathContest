@@ -309,7 +309,7 @@ Partial Class MathContestForm
         Me.SummeryButton.Name = "SummeryButton"
         Me.SummeryButton.Size = New System.Drawing.Size(214, 71)
         Me.SummeryButton.TabIndex = 2
-        Me.SummeryButton.Text = "&Summery"
+        Me.SummeryButton.Text = "S&ummery"
         Me.SummeryButtonToolTip.SetToolTip(Me.SummeryButton, "Shows how many questions the student has gotten correct")
         Me.SummeryButton.UseVisualStyleBackColor = False
         '
